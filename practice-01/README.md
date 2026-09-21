@@ -16,14 +16,22 @@
 
 ## Запуск
 
-Команды выполняются из корня репозитория `tip-js-practices`:
+Все команды выполняются из корня репозитория `tip-js-practices`:
 
     node practice-01/js/hello.js
     node practice-01/js/types.js
     node practice-01/js/progress.js
     node practice-01/js/plan.js
     node practice-01/js/debug.js
-    node practice-01/js/plan-week.js
+
+Дополнительное задание: `node practice-01/js/plan-week.js`.
+
+Запуск в браузере: открыть `practice-01/index.html`, заменить путь в теге `script`
+на нужный файл (например, `./js/types.js`), сохранить изменения, перезагрузить
+страницу и посмотреть вывод во вкладке Console. Одновременно подключается только
+один файл. Все пять обязательных файлов работают в обоих окружениях; различие
+`typeof document` в задании 1 ожидаемо. После проверок в `index.html` возвращено
+подключение `./js/hello.js`, а в заданиях 3 и 4 возвращены данные варианта 1.
 
 
 
