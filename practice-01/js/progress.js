@@ -1,3 +1,5 @@
+//(N = 1 в журнале)
+
 "use strict"
 
 const totalTasks = 12;

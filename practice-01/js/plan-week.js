@@ -1,10 +1,10 @@
-//(N = 1 в журнале)
-
 "use strict";
 
-const totalTasks = 5;
-const completedTasks = 5;
-const dailyLimit = 2;
+const totalTasks = 6;
+const completedTasks = 0;
+const dailyLimit = 1;
+
+const dayNames = ["понедельник", "вторник", "среда", "четверг", "пятница", "суббота", "воскресенье"];
 
 if (!Number.isFinite(totalTasks) || !Number.isFinite(completedTasks)) {
     if (typeof totalTasks === "string" || typeof completedTasks === "string") {
@@ -26,32 +26,43 @@ if (!Number.isFinite(totalTasks) || !Number.isFinite(completedTasks)) {
     console.log("Ошибка: недопустимое числовое значение дневной нормы.");
 } else if (!Number.isInteger(dailyLimit)) {
     console.log("Ошибка: дробной дневной нормы быть не должно.");
-} else if (dailyLimit === 0) {
-    console.log("Ошибка; цикл не запускается.");
+} else if (dailyLimit < 1) {
+    console.log("Ошибка: дневная норма должна быть не меньше 1.");
 } else if (dailyLimit > 1000) {
     console.log("Ошибка: превышена верхняя граница нормы.");
 } else {
     const difference = totalTasks - completedTasks;
 
     if (difference === 0) {
-        console.log("Потребуется дней: 0");
+        console.log("Рабочих дней с выполнением задач: 0");
+        console.log("Всего календарных дней: 0");
     } else {
         console.log(`Осталось задач: ${difference}`);
 
         let remaining = difference;
         let day = 1;
+        let workingDays = 0;
 
         while (remaining > 0) {
-            const completedToday = Math.min(remaining, dailyLimit);
-            remaining -= completedToday;
+            const weekdayIndex = (day - 1) % 7; // 0 - понедельник, 5 - суббота, 6 - воскресенье
+            const dayName = dayNames[weekdayIndex];
 
-            console.log(
-                `День ${day}: выполнено ${completedToday}, осталось ${remaining}`
-            );
+            if (weekdayIndex >= 5) {
+                console.log(`День ${day} (${dayName}): выходной`);
+            } else {
+                const completedToday = Math.min(remaining, dailyLimit);
+                remaining -= completedToday;
+                workingDays += 1;
+
+                console.log(
+                    `День ${day} (${dayName}): выполнено ${completedToday}, осталось ${remaining}`
+                );
+            }
 
             day += 1;
         }
 
-        console.log(`Потребуется дней: ${day - 1}`);
+        console.log(`Рабочих дней с выполнением задач: ${workingDays}`);
+        console.log(`Всего календарных дней: ${day - 1}`);
     }
 }
